@@ -96,10 +96,10 @@ export default function FrontBackPage() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex flex-col lg:flex-row">
       {/* FRONTEND */}
-      <div className="w-1/2 bg-white flex flex-col justify-center items-center relative">
-        <div className="absolute top-6 left-6">
+      <div className="w-full lg:w-1/2 bg-white flex flex-col justify-center items-center relative min-h-screen lg:min-h-0">
+        <div className="absolute top-4 left-4 lg:top-6 lg:left-6 z-20">
           <Link
             href="/"
             className="inline-flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm"
@@ -111,26 +111,26 @@ export default function FrontBackPage() {
           </Link>
         </div>
 
-        <div className="flex flex-col justify-center items-center p-8 max-w-md mx-auto">
-          <div className="text-center mb-16">
-            <h1 className="text-6xl font-light text-gray-800 mb-8">
+        <div className="flex flex-col justify-center items-center p-4 lg:p-8 max-w-md mx-auto w-full">
+          <div className="text-center mb-8 lg:mb-16">
+            <h1 className="text-4xl lg:text-6xl font-light text-gray-800 mb-4 lg:mb-8">
               Frontend
             </h1>
           </div>
 
           <button
             onClick={() => submitVote('frontend')}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-6 px-16 rounded-2xl border-0 transition-all duration-200 mb-12 shadow-lg hover:shadow-xl text-xl cursor-pointer"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-4 px-8 lg:py-6 lg:px-16 rounded-2xl border-0 transition-all duration-200 mb-8 lg:mb-12 shadow-lg hover:shadow-xl text-lg lg:text-xl cursor-pointer w-full lg:w-auto"
           >
             Votar em Frontend
           </button>
 
-          <div className="w-full bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
+          <div className="w-full bg-white border border-gray-200 rounded-xl p-4 lg:p-8 shadow-sm">
             <div className="text-center">
-              <div className="text-6xl font-light text-blue-600 mb-4">
+              <div className="text-4xl lg:text-6xl font-light text-blue-600 mb-3 lg:mb-4">
                 {frontendVote.count.toLocaleString('pt-BR')}
               </div>
-              <div className="text-lg text-gray-600 mb-6">votos recebidos</div>
+              <div className="text-base lg:text-lg text-gray-600 mb-4 lg:mb-6">votos recebidos</div>
               
               <div className="w-full bg-gray-100 rounded-full h-3 mb-4">
                 <div
@@ -148,20 +148,20 @@ export default function FrontBackPage() {
       </div>
 
       {/* BACKEND */}
-      <div className="w-1/2 bg-gray-300 flex flex-col justify-center items-center" style={{
+      <div className="w-full lg:w-1/2 bg-gray-300 flex flex-col justify-center items-center min-h-screen lg:min-h-0" style={{
         background: 'linear-gradient(45deg, #c0c0c0 25%, transparent 25%), linear-gradient(-45deg, #c0c0c0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #c0c0c0 75%), linear-gradient(-45deg, transparent 75%, #c0c0c0 75%)',
         backgroundSize: '20px 20px',
         backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
       }}>
-        <div className="flex flex-col justify-center items-center p-8">
-          <div className="text-center mb-12">
-            <div className="bg-gray-400 border-4 border-gray-600 p-4 mb-6" style={{
+        <div className="flex flex-col justify-center items-center p-4 lg:p-8 w-full">
+          <div className="text-center mb-8 lg:mb-12">
+            <div className="bg-gray-400 border-4 border-gray-600 p-3 lg:p-4 mb-4 lg:mb-6" style={{
               boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.3), inset 2px 2px 4px rgba(255,255,255,0.8)'
             }}>
-              <h1 className="text-4xl font-bold text-black mb-2" style={{ fontFamily: 'monospace', textShadow: '2px 2px 0px #808080' }}>
+              <h1 className="text-3xl lg:text-4xl font-bold text-black mb-1 lg:mb-2" style={{ fontFamily: 'monospace', textShadow: '2px 2px 0px #808080' }}>
                 BACKEND
               </h1>
-              <div className="text-black text-lg" style={{ fontFamily: 'monospace' }}>
+              <div className="text-black text-base lg:text-lg" style={{ fontFamily: 'monospace' }}>
                 *** SISTEMA ATIVO ***
               </div>
             </div>
@@ -169,7 +169,7 @@ export default function FrontBackPage() {
 
           <button
             onClick={() => submitVote('backend')}
-            className="bg-gray-400 text-black font-bold py-4 px-8 text-xl border-4 border-gray-600 mb-12 transition-all duration-100 active:translate-x-1 active:translate-y-1 cursor-pointer"
+            className="bg-gray-400 text-black font-bold py-3 px-6 lg:py-4 lg:px-8 text-lg lg:text-xl border-4 border-gray-600 mb-8 lg:mb-12 transition-all duration-100 active:translate-x-1 active:translate-y-1 cursor-pointer w-full lg:w-auto"
             style={{
               fontFamily: 'monospace',
               boxShadow: '4px 4px 0px rgba(0,0,0,0.5)',
@@ -179,7 +179,7 @@ export default function FrontBackPage() {
             [ VOTAR BACKEND ]
           </button>
 
-          <div className="bg-black text-green-400 p-6 border-4 border-gray-600 font-mono text-sm max-w-sm" style={{
+          <div className="bg-black text-green-400 p-4 lg:p-6 border-4 border-gray-600 font-mono text-xs lg:text-sm w-full max-w-sm" style={{
             boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.2)'
           }}>
             <div className="text-center">
@@ -187,7 +187,7 @@ export default function FrontBackPage() {
               <div className="text-green-400 mb-2">║ ESTATISTICAS BACKEND  ║</div>
               <div className="text-green-400 mb-4">╚═══════════════════════╝</div>
 
-              <div className="text-2xl font-bold text-green-400 mb-2 font-mono break-all leading-tight">
+              <div className="text-xl lg:text-2xl font-bold text-green-400 mb-2 font-mono break-all leading-tight">
                 {(() => {
                   const count = backendVote.count;
                   if (count >= 1000000) {
@@ -226,7 +226,7 @@ export default function FrontBackPage() {
       </div>
 
       {/* Divisor central */}
-      <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+      <div className="hidden lg:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
         <div className="bg-white/90 backdrop-blur-md shadow-2xl border-2 border-gray-200 rounded-1xl p-6 text-center min-w-[140px]">
           <div className="text-sm text-gray-600 mb-2">Total</div>
           <div className="text-2xl font-bold text-gray-800">
@@ -242,6 +242,24 @@ export default function FrontBackPage() {
               }
             })()}
           </div>
+        </div>
+      </div>
+
+      {/* Divisor central mobile */}
+      <div className="lg:hidden w-full bg-gray-200 p-4 text-center">
+        <div className="text-sm text-gray-600 mb-1">Total Geral</div>
+        <div className="text-xl font-bold text-gray-800">
+          {(() => {
+            if (totalVotes >= 1000000000) {
+              return `${(totalVotes / 1000000000).toFixed(1)}B`;
+            } else if (totalVotes >= 1000000) {
+              return `${(totalVotes / 1000000).toFixed(1)}M`;
+            } else if (totalVotes >= 1000) {
+              return `${(totalVotes / 1000).toFixed(1)}K`;
+            } else {
+              return totalVotes.toLocaleString('pt-BR');
+            }
+          })()}
         </div>
       </div>
     </div>
