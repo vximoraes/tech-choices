@@ -128,7 +128,7 @@ export default function FrontBackPage() {
           <div className="w-full bg-white border border-gray-200 rounded-xl p-4 lg:p-8 shadow-sm">
             <div className="text-center">
               <div className="text-4xl lg:text-6xl font-light text-blue-600 mb-3 lg:mb-4">
-                {frontendVote.count.toLocaleString('pt-BR')}
+                {frontendVote.count}
               </div>
               <div className="text-base lg:text-lg text-gray-600 mb-4 lg:mb-6">votos recebidos</div>
               
@@ -188,16 +188,7 @@ export default function FrontBackPage() {
               <div className="text-green-400 mb-4">╚═══════════════════════╝</div>
 
               <div className="text-xl lg:text-2xl font-bold text-green-400 mb-2 font-mono break-all leading-tight">
-                {(() => {
-                  const count = backendVote.count;
-                  if (count >= 1000000) {
-                    return `${(count / 1000000).toFixed(1)}M`.padStart(8, '0');
-                  } else if (count >= 1000) {
-                    return `${(count / 1000).toFixed(1)}K`.padStart(8, '0');
-                  } else {
-                    return count.toString().padStart(8, '0');
-                  }
-                })()}
+                {backendVote.count.toString().padStart(8, '0')}
               </div>
               <div className="text-green-400 mb-4 text-xs">TOTAL_VOTOS</div>
 
@@ -211,12 +202,6 @@ export default function FrontBackPage() {
                 <div className="text-green-400 text-center mt-2 text-xs">
                   {totalVotes > 0 ? Math.round((backendVote.count / totalVotes) * 100) : 0}% DO_TOTAL
                 </div>
-
-                {backendVote.count >= 1000000 && (
-                  <div className="text-red-400 text-center mt-2 text-xs animate-pulse">
-                    *** OVERFLOW DETECTADO ***
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -230,17 +215,7 @@ export default function FrontBackPage() {
         <div className="bg-white/90 backdrop-blur-md shadow-2xl border-2 border-gray-200 rounded-1xl p-6 text-center min-w-[140px]">
           <div className="text-sm text-gray-600 mb-2">Total</div>
           <div className="text-2xl font-bold text-gray-800">
-            {(() => {
-              if (totalVotes >= 1000000000) {
-                return `${(totalVotes / 1000000000).toFixed(1)}B`;
-              } else if (totalVotes >= 1000000) {
-                return `${(totalVotes / 1000000).toFixed(1)}M`;
-              } else if (totalVotes >= 1000) {
-                return `${(totalVotes / 1000).toFixed(1)}K`;
-              } else {
-                return totalVotes.toLocaleString('pt-BR');
-              }
-            })()}
+            {totalVotes}
           </div>
         </div>
       </div>
@@ -249,17 +224,7 @@ export default function FrontBackPage() {
       <div className="lg:hidden w-full bg-gray-200 p-4 text-center">
         <div className="text-sm text-gray-600 mb-1">Total Geral</div>
         <div className="text-xl font-bold text-gray-800">
-          {(() => {
-            if (totalVotes >= 1000000000) {
-              return `${(totalVotes / 1000000000).toFixed(1)}B`;
-            } else if (totalVotes >= 1000000) {
-              return `${(totalVotes / 1000000).toFixed(1)}M`;
-            } else if (totalVotes >= 1000) {
-              return `${(totalVotes / 1000).toFixed(1)}K`;
-            } else {
-              return totalVotes.toLocaleString('pt-BR');
-            }
-          })()}
+          {totalVotes}
         </div>
       </div>
     </div>

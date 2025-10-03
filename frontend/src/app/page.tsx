@@ -1,5 +1,6 @@
-'use client';
+"use client";
 
+import React from 'react';
 import Link from 'next/link';
 import {
   Zap,
@@ -13,7 +14,7 @@ interface CategoryCard {
   id: string;
   title: string;
   route: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   gradient: string;
   author: string;
 }
