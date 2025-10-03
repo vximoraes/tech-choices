@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
+import Link from "next/link"
 
 const data = [
     { 
@@ -29,17 +29,24 @@ const data = [
 const total = data.reduce((sum, item) => sum + item.votos, 0)
 
 export default function SqlNosqlPage() {
-    const [hoveredSide, setHoveredSide] = useState<string | null>(null)
-
     return (
-        <div className="h-screen flex overflow-hidden">
+        <div className="h-screen flex overflow-hidden relative">
+            {/* Botão de Voltar */}
+            <div className="absolute top-4 left-4 lg:top-6 lg:left-6 z-30">
+                <Link
+                    href="/"
+                    className="inline-flex items-center text-white hover:text-gray-200 transition-colors duration-200 text-sm bg-black bg-opacity-20 backdrop-blur-sm px-3 py-2 rounded-lg"
+                >
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Voltar às categorias
+                </Link>
+            </div>
+
             {/* Lado MySQL */}
             <div 
-                className={`flex-1 bg-gradient-to-br ${data[0].bgColor} relative transition-all duration-700 ${
-                    hoveredSide === 'mongodb' ? 'flex-[0.3]' : hoveredSide === 'mysql' ? 'flex-[0.7]' : 'flex-1'
-                }`}
-                onMouseEnter={() => setHoveredSide('mysql')}
-                onMouseLeave={() => setHoveredSide(null)}
+                className={`flex-1 bg-gradient-to-br ${data[0].bgColor} relative`}
             >
                 {/* Padrão de Grid de Tabela no Fundo */}
                 <div className="absolute inset-0 opacity-10">
@@ -50,29 +57,15 @@ export default function SqlNosqlPage() {
                     </div>
                 </div>
 
-                {/* Ícones de Tabela Flutuantes */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute top-20 left-10 opacity-20 animate-pulse">
-                        <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M3 7V17C3 18.1 3.9 19 5 19H19C20.1 19 21 18.1 21 17V7C21 5.9 20.1 5 19 5H5C3.9 5 3 5.9 3 7M5 7H19V9H5V7M5 11H19V13H5V11M5 15H19V17H5V15Z"/>
-                        </svg>
-                    </div>
-                    <div className="absolute bottom-32 right-16 opacity-15 animate-pulse delay-1000">
-                        <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M3 7V17C3 18.1 3.9 19 5 19H19C20.1 19 21 18.1 21 17V7C21 5.9 20.1 5 19 5H5C3.9 5 3 5.9 3 7M5 7H19V9H5V7M5 11H19V13H5V11M5 15H19V17H5V15Z"/>
-                        </svg>
-                    </div>
-                </div>
-
                 {/* Conteúdo MySQL */}
                 <div className="relative z-10 h-full flex flex-col justify-center items-center text-white p-8">
                     <div className="text-center space-y-6">
-                        <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300">
+                        <div className="w-32 h-32 bg-white rounded-2xl flex items-center justify-center shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300">
                             <Image 
                                 src={data[0].icon} 
                                 alt={data[0].name} 
-                                width={48} 
-                                height={48}
+                                width={64} 
+                                height={64}
                                 className="object-contain"
                             />
                         </div>
@@ -101,22 +94,6 @@ export default function SqlNosqlPage() {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Características SQL */}
-                        <div className="mt-8 space-y-2 text-sm opacity-80">
-                            <div className="flex items-center justify-center gap-2">
-                                <div className="w-2 h-2 bg-white rounded-full"></div>
-                                <span>ACID Compliance</span>
-                            </div>
-                            <div className="flex items-center justify-center gap-2">
-                                <div className="w-2 h-2 bg-white rounded-full"></div>
-                                <span>Esquema Rígido</span>
-                            </div>
-                            <div className="flex items-center justify-center gap-2">
-                                <div className="w-2 h-2 bg-white rounded-full"></div>
-                                <span>Relacionamentos</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -132,46 +109,26 @@ export default function SqlNosqlPage() {
 
             {/* Lado MongoDB */}
             <div 
-                className={`flex-1 bg-gradient-to-br ${data[1].bgColor} relative transition-all duration-700 ${
-                    hoveredSide === 'mysql' ? 'flex-[0.3]' : hoveredSide === 'mongodb' ? 'flex-[0.7]' : 'flex-1'
-                }`}
-                onMouseEnter={() => setHoveredSide('mongodb')}
-                onMouseLeave={() => setHoveredSide(null)}
+                className={`flex-1 bg-gradient-to-br ${data[1].bgColor} relative`}
             >
                 {/* Padrão de Documentos no Fundo */}
                 <div className="absolute inset-0 opacity-10">
                     <div className="flex flex-wrap gap-4 p-8 h-full">
                         {Array.from({length: 20}).map((_, i) => (
-                            <div key={i} className="w-16 h-20 bg-white rounded-lg transform rotate-12" style={{
-                                transform: `rotate(${Math.random() * 30 - 15}deg) translate(${Math.random() * 20}px, ${Math.random() * 20}px)`
-                            }}></div>
+                            <div key={i} className="w-16 h-20 bg-white rounded-lg transform rotate-12"></div>
                         ))}
-                    </div>
-                </div>
-
-                {/* Ícones de Documento Flutuantes */}
-                <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute top-24 right-12 opacity-20 animate-pulse delay-500">
-                        <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2M21 9V7L15 1H5C3.9 1 3 1.9 3 3V21C3 22.1 3.9 23 5 23H19C20.1 23 21 22.1 21 21V9M19 9H14V4H5V21H19V9Z"/>
-                        </svg>
-                    </div>
-                    <div className="absolute bottom-20 left-16 opacity-15 animate-pulse delay-1500">
-                        <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2M21 9V7L15 1H5C3.9 1 3 1.9 3 3V21C3 22.1 3.9 23 5 23H19C20.1 23 21 22.1 21 21V9M19 9H14V4H5V21H19V9Z"/>
-                        </svg>
                     </div>
                 </div>
 
                 {/* Conteúdo MongoDB */}
                 <div className="relative z-10 h-full flex flex-col justify-center items-center text-white p-8">
                     <div className="text-center space-y-6">
-                        <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300">
+                        <div className="w-32 h-32 bg-white rounded-2xl flex items-center justify-center shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300">
                             <Image 
                                 src={data[1].icon} 
                                 alt={data[1].name} 
-                                width={48} 
-                                height={48}
+                                width={64} 
+                                height={64}
                                 className="object-contain"
                             />
                         </div>
@@ -198,22 +155,6 @@ export default function SqlNosqlPage() {
                                 <div className="text-center mt-2 text-sm opacity-80">
                                     {Math.round((data[1].votos / total) * 100)}% dos votos
                                 </div>
-                            </div>
-                        </div>
-
-                        {/* Características NoSQL */}
-                        <div className="mt-8 space-y-2 text-sm opacity-80">
-                            <div className="flex items-center justify-center gap-2">
-                                <div className="w-2 h-2 bg-white rounded-full"></div>
-                                <span>Esquema Flexível</span>
-                            </div>
-                            <div className="flex items-center justify-center gap-2">
-                                <div className="w-2 h-2 bg-white rounded-full"></div>
-                                <span>Escalabilidade</span>
-                            </div>
-                            <div className="flex items-center justify-center gap-2">
-                                <div className="w-2 h-2 bg-white rounded-full"></div>
-                                <span>JSON/BSON</span>
                             </div>
                         </div>
                     </div>
