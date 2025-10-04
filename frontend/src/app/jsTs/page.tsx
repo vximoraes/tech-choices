@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import VoteStatsCard from '@/components/VoteStatsCard';
 
 interface VoteData {
   option: string;
@@ -135,25 +136,11 @@ export default function JsTsPage() {
             Votar em JavaScript
           </button>
 
-          <div className="w-full bg-white border-2 border-yellow-200 rounded-xl p-4 lg:p-8 shadow-lg">
-            <div className="text-center">
-              <div className="text-4xl lg:text-6xl font-bold text-yellow-600 mb-3 lg:mb-4">
-                {javascriptVote.count}
-              </div>
-              <div className="text-base lg:text-lg text-gray-600 mb-4 lg:mb-6">votos recebidos</div>
-              
-              <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
-                <div
-                  className="bg-gradient-to-r from-yellow-400 to-yellow-500 h-4 rounded-full transition-all duration-700 shadow-inner"
-                  style={{ width: `${totalVotes > 0 ? (javascriptVote.count / totalVotes) * 100 : 0}%` }}
-                ></div>
-              </div>
-              
-              <div className="text-sm font-medium text-yellow-700">
-                {totalVotes > 0 ? Math.round((javascriptVote.count / totalVotes) * 100) : 0}% do total
-              </div>
-            </div>
-          </div>
+          <VoteStatsCard
+            count={javascriptVote.count}
+            totalVotes={totalVotes}
+            colorScheme="javascript"
+          />
         </div>
       </div>
 
@@ -183,25 +170,11 @@ export default function JsTsPage() {
             Votar em TypeScript
           </button>
 
-          <div className="w-full bg-white border-2 border-blue-200 rounded-xl p-4 lg:p-8 shadow-lg">
-            <div className="text-center">
-              <div className="text-4xl lg:text-6xl font-bold text-blue-600 mb-3 lg:mb-4">
-                {typescriptVote.count}
-              </div>
-              <div className="text-base lg:text-lg text-gray-600 mb-4 lg:mb-6">votos recebidos</div>
-              
-              <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
-                <div
-                  className="bg-gradient-to-r from-blue-500 to-blue-600 h-4 rounded-full transition-all duration-700 shadow-inner"
-                  style={{ width: `${totalVotes > 0 ? (typescriptVote.count / totalVotes) * 100 : 0}%` }}
-                ></div>
-              </div>
-              
-              <div className="text-sm font-medium text-blue-700">
-                {totalVotes > 0 ? Math.round((typescriptVote.count / totalVotes) * 100) : 0}% do total
-              </div>
-            </div>
-          </div>
+          <VoteStatsCard
+            count={typescriptVote.count}
+            totalVotes={totalVotes}
+            colorScheme="typescript"
+          />
         </div>
       </div>
 
