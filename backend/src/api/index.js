@@ -1,3 +1,5 @@
+// CONTEÚDO ATUALIZADO DE: backend/src/api/index.js
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -8,7 +10,17 @@ import { VoteService } from '../services/VoteService.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+
+// Conexão com o banco de dados
+connectDB().then(async () => {
+    const voteService = new VoteService();
+    await voteService.initializeAllVotes();
+    console.log('All vote categories and options initialized');
+}).catch(error => {
+    console.error('Failed to connect to DB and initialize votes:', error);
+    process.exit(1);
+});
+
 
 app.use(cors());
 app.use(express.json());
@@ -19,6 +31,8 @@ app.get('/health', (req, res) => {
     res.json({ status: 'OK', message: 'Server is running' });
 });
 
+/*
+const PORT = process.env.PORT || 3001;
 const startServer = async () => {
     try {
         await connectDB();
@@ -36,5 +50,7 @@ const startServer = async () => {
         process.exit(1);
     }
 };
-
 startServer();
+*/
+
+export default app;
