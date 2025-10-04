@@ -1,34 +1,123 @@
 "use client"
 
+import { useState, useEffect } from 'react';
 import Image from "next/image"
 import Link from "next/link"
+
+interface VoteData {
+  option: string;
+  count: number;
+}
 
 const data = [
     { 
         name: "MySQL", 
-        votos: 10, 
         icon: "/mysql-logo-svgrepo-com.svg",
         type: "SQL",
         color: "blue",
         bgColor: "from-blue-600 to-blue-800",
         description: "Estruturado & Relacional",
-        concept: "Tabelas conectadas por relacionamentos"
+        concept: "Tabelas conectadas por relacionamentos",
+        option: "sql"
     },
     { 
         name: "MongoDB", 
-        votos: 5, 
         icon: "/mongodb-svgrepo-com.svg",
         type: "NoSQL", 
         color: "green",
         bgColor: "from-green-600 to-green-800",
         description: "Flexível & Escalável",
-        concept: "Documentos JSON independentes"
+        concept: "Documentos JSON independentes",
+        option: "nosql"
     },
 ]
 
-const total = data.reduce((sum, item) => sum + item.votos, 0)
-
 export default function SqlNosqlPage() {
+    const [votes, setVotes] = useState<VoteData[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [voting, setVoting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001/api';
+
+    const fetchVotes = async () => {
+        try {
+            const response = await fetch(`${API_BASE_URL}/sql-nosql/votes`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch votes');
+            }
+            const data = await response.json();
+            setVotes(data);
+            setError(null);
+        } catch (error) {
+            console.error('Error fetching votes:', error);
+            setError('Erro ao carregar os dados de votação');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const submitVote = async (option: string) => {
+        if (voting) return;
+
+        setVoting(true);
+        try {
+            const response = await fetch(`${API_BASE_URL}/sql-nosql/vote`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ option }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to submit vote');
+            }
+
+            await fetchVotes();
+        } catch (error) {
+            console.error('Error submitting vote:', error);
+            setError('Erro ao registrar seu voto');
+        } finally {
+            setVoting(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchVotes();
+    }, []);
+
+    const sqlVote = votes.find(v => v.option.toLowerCase() === 'sql') || { option: 'sql', count: 0 };
+    const nosqlVote = votes.find(v => v.option.toLowerCase() === 'nosql') || { option: 'nosql', count: 0 };
+    const total = sqlVote.count + nosqlVote.count;
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+                    <p className="text-gray-600">Carregando...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-50">
+                <div className="text-center">
+                    <div className="text-red-500 mb-4">⚠️</div>
+                    <p className="text-red-600">{error}</p>
+                    <button
+                        onClick={fetchVotes}
+                        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
+                        Tentar Novamente
+                    </button>
+                </div>
+            </div>
+        );
+    }
     return (
         <div className="h-screen flex overflow-hidden relative">
             {/* Botão de Voltar */}
@@ -60,7 +149,10 @@ export default function SqlNosqlPage() {
                 {/* Conteúdo MySQL */}
                 <div className="relative z-10 h-full flex flex-col justify-center items-center text-white p-8">
                     <div className="text-center space-y-6">
-                        <div className="w-32 h-32 bg-white rounded-2xl flex items-center justify-center shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300">
+                        <div 
+                            className={`w-32 h-32 bg-white rounded-2xl flex items-center justify-center shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300 cursor-pointer ${voting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            onClick={() => !voting && submitVote('sql')}
+                        >
                             <Image 
                                 src={data[0].icon} 
                                 alt={data[0].name} 
@@ -77,7 +169,7 @@ export default function SqlNosqlPage() {
                         {/* Votação */}
                         <div className="mt-8 space-y-4">
                             <div className="text-center">
-                                <div className="text-5xl font-bold mb-2">{data[0].votos}</div>
+                                <div className="text-5xl font-bold mb-2">{sqlVote.count}</div>
                                 <div className="text-lg opacity-80">votos</div>
                             </div>
                             
@@ -86,11 +178,11 @@ export default function SqlNosqlPage() {
                                 <div className="bg-white bg-opacity-30 rounded-full h-3">
                                     <div 
                                         className="bg-white rounded-full h-3 transition-all duration-2000 ease-out"
-                                        style={{ width: `${(data[0].votos / total) * 100}%` }}
+                                        style={{ width: `${total > 0 ? (sqlVote.count / total) * 100 : 0}%` }}
                                     ></div>
                                 </div>
                                 <div className="text-center mt-2 text-sm opacity-80">
-                                    {Math.round((data[0].votos / total) * 100)}% dos votos
+                                    {total > 0 ? Math.round((sqlVote.count / total) * 100) : 0}% dos votos
                                 </div>
                             </div>
                         </div>
@@ -123,7 +215,10 @@ export default function SqlNosqlPage() {
                 {/* Conteúdo MongoDB */}
                 <div className="relative z-10 h-full flex flex-col justify-center items-center text-white p-8">
                     <div className="text-center space-y-6">
-                        <div className="w-32 h-32 bg-white rounded-2xl flex items-center justify-center shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300">
+                        <div 
+                            className={`w-32 h-32 bg-white rounded-2xl flex items-center justify-center shadow-2xl mb-6 transform hover:scale-110 transition-transform duration-300 cursor-pointer ${voting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            onClick={() => !voting && submitVote('nosql')}
+                        >
                             <Image 
                                 src={data[1].icon} 
                                 alt={data[1].name} 
@@ -140,7 +235,7 @@ export default function SqlNosqlPage() {
                         {/* Votação */}
                         <div className="mt-8 space-y-4">
                             <div className="text-center">
-                                <div className="text-5xl font-bold mb-2">{data[1].votos}</div>
+                                <div className="text-5xl font-bold mb-2">{nosqlVote.count}</div>
                                 <div className="text-lg opacity-80">votos</div>
                             </div>
                             
@@ -149,11 +244,11 @@ export default function SqlNosqlPage() {
                                 <div className="bg-white bg-opacity-30 rounded-full h-3">
                                     <div 
                                         className="bg-white rounded-full h-3 transition-all duration-2000 ease-out"
-                                        style={{ width: `${(data[1].votos / total) * 100}%` }}
+                                        style={{ width: `${total > 0 ? (nosqlVote.count / total) * 100 : 0}%` }}
                                     ></div>
                                 </div>
                                 <div className="text-center mt-2 text-sm opacity-80">
-                                    {Math.round((data[1].votos / total) * 100)}% dos votos
+                                    {total > 0 ? Math.round((nosqlVote.count / total) * 100) : 0}% dos votos
                                 </div>
                             </div>
                         </div>
@@ -167,6 +262,9 @@ export default function SqlNosqlPage() {
                     <div className="text-center text-gray-800">
                         <div className="text-sm font-medium">Total de Votos</div>
                         <div className="text-2xl font-bold">{total}</div>
+                        {voting && (
+                            <div className="text-xs text-blue-600 mt-1">Registrando voto...</div>
+                        )}
                     </div>
                 </div>
             </div>
