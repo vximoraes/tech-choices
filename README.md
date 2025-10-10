@@ -174,6 +174,7 @@ tech-choices/
     <a href="https://github.com/vximoraes" target="_blank" rel="noopener noreferrer">
         <img src="https://avatars.githubusercontent.com/u/127636642?v=4" alt="Vinicius Moraes" width="70" height="70" style="vertical-align:middle;border-radius:50%;margin-right:12px;" />
     </a>
+    <br>
     <a href="https://github.com/vximoraes" target="_blank" rel="noopener noreferrer" style="vertical-align:middle;font-weight:700;color:inherit;text-decoration:none;">
         Vinicius Moraes
     </a>
@@ -186,6 +187,7 @@ tech-choices/
     <a href="https://github.com/Lucca-Livino" target="_blank" rel="noopener noreferrer">
         <img src="https://avatars.githubusercontent.com/u/197806666?v=4" alt="Lucca Fernandes" width="70" height="70" style="vertical-align:middle;border-radius:50%;margin-right:12px;" />
     </a>
+    <br>
     <a href="https://github.com/Lucca-Livino" target="_blank" rel="noopener noreferrer" style="vertical-align:middle;font-weight:700;color:inherit;text-decoration:none;">
         Lucca Fernandes
     </a>
@@ -198,6 +200,7 @@ tech-choices/
     <a href="https://github.com/EduardoTartas" target="_blank" rel="noopener noreferrer">
         <img src="https://avatars.githubusercontent.com/u/127796879?v=4" alt="Eduardo Tartas" width="70" height="70" style="vertical-align:middle;border-radius:50%;margin-right:12px;" />
     </a>
+    <br>
     <a href="https://github.com/EduardoTartas" target="_blank" rel="noopener noreferrer" style="vertical-align:middle;font-weight:700;color:inherit;text-decoration:none;">
         Eduardo Tartas
     </a>
@@ -210,6 +213,7 @@ tech-choices/
     <a href="https://github.com/ArthurGomes11" target="_blank" rel="noopener noreferrer">
         <img src="https://avatars.githubusercontent.com/u/172559760?v=4" alt="Arthur Henrike" width="70" height="70" style="vertical-align:middle;border-radius:50%;margin-right:12px;" />
     </a>
+    <br>
     <a href="https://github.com/ArthurGomes11" target="_blank" rel="noopener noreferrer" style="vertical-align:middle;font-weight:700;color:inherit;text-decoration:none;">
         Arthur Henrike
     </a>
@@ -222,6 +226,7 @@ tech-choices/
     <a href="https://github.com/YuriZetoles" target="_blank" rel="noopener noreferrer">
         <img src="https://avatars.githubusercontent.com/u/132094461?v=4" alt="Yuri Zetoles" width="70" height="70" style="vertical-align:middle;border-radius:50%;margin-right:12px;" />
     </a>
+    <br>
     <a href="https://github.com/YuriZetoles" target="_blank" rel="noopener noreferrer" style="vertical-align:middle;font-weight:700;color:inherit;text-decoration:none;">
         Yuri Zetoles
     </a>
