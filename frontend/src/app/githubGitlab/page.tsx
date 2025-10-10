@@ -147,10 +147,10 @@ export default function GithubGitlabPage() {
           href="/"
           className="inline-flex items-center text-gray-300 hover:text-orange-400 transition-colors duration-200 text-lg font-medium group"
         >
-          <svg className="w-6 h-6 mr-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          Voltar
+          Voltar às categorias
         </Link>
       </div>
 
@@ -217,8 +217,8 @@ export default function GithubGitlabPage() {
               {/* Ícone e Título */}
               <div className="flex justify-center mb-4">
                 {/* GitLab Icon (SVG simples) */}
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-16 h-16 text-orange-500">
-                    <path d="M22.09 11.59l-1.07-3.3-3.29-1.06-1.07-3.29-3.29-1.07-1.06 3.29-3.3 1.07-1.06 3.29-3.3 1.06 3.3 1.07 1.06 3.3 3.3 1.06 1.07 3.3 3.3-1.07 1.06-3.29 3.29-1.07zm-10.09 9.41c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="64" height="64" viewBox="0 0 48 48">
+                  <path fill="#e53935" d="M24 43L16 20 32 20z"></path><path fill="#ff7043" d="M24 43L42 20 32 20z"></path><path fill="#e53935" d="M37 5L42 20 32 20z"></path><path fill="#ffa726" d="M24 43L42 20 45 28z"></path><path fill="#ff7043" d="M24 43L6 20 16 20z"></path><path fill="#e53935" d="M11 5L6 20 16 20z"></path><path fill="#ffa726" d="M24 43L6 20 3 28z"></path>
                 </svg>
               </div>
 
