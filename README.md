@@ -4,17 +4,7 @@ Sistema de votação para escolhas tecnológicas com interface interativa e visu
 
 Deploy: **[Tech Choices](https://tech-choices-front.vercel.app)**
 
-## Índice
-- [Funcionalidades](#-funcionalidades)
-- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [Instalação](#-instalação)
-- [Configuração](#-configuração)
-- [Executando o Projeto](#-executando-o-projeto)
-- [Deploy na Vercel](#-deploy-na-vercel)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [API Endpoints](#-api-endpoints)
-- [Categorias Disponíveis](#-categorias-disponíveis)
-- [Contribuição](#-contribuição)
+![Tech-Choices](./images/tech-choices.png)
 
 ## Tecnologias Utilizadas
 
