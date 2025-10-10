@@ -166,7 +166,7 @@ tech-choices/
 - `GET /api/windows-linux-mac` - Obter votos Windows vs Linux vs Mac
 - `POST /api/windows-linux-mac/vote` - Votar em Windows vs Linux vs Mac
 
-## Categorias Disponíveis & Criadores
+## Criadores
 
 1. **Frontend vs Backend** 
     <br>
