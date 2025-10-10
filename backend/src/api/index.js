@@ -31,26 +31,12 @@ app.get('/health', (req, res) => {
     res.json({ status: 'OK', message: 'Server is running' });
 });
 
-/*
-const PORT = process.env.PORT || 3001;
-const startServer = async () => {
-    try {
-        await connectDB();
-
-        const voteService = new VoteService();
-        await voteService.initializeAllVotes();
-        console.log('All vote categories and options initialized');
-
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
-            console.log(`Health check: http://localhost:${PORT}/health`);
-        });
-    } catch (error) {
-        console.error('Failed to start server:', error);
-        process.exit(1);
-    }
-};
-startServer();
-*/
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = process.env.PORT || 3001;
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+        console.log(`Health check: http://localhost:${PORT}/health`);
+    });
+}
 
 export default app;
