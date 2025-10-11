@@ -16,4 +16,11 @@ router.use('/categories/sql-nosql', sqlNosqlRoutes);
 router.use('/categories/github-gitlab', githubGitlabRoutes);
 router.use('/categories/windows-linux-mac', windowsLinuxMacRoutes);
 
+// Rotas alternativas para compatibilidade com frontend (sem /categories)
+router.use('/front-back', frontBackRoutes);
+router.use('/js-ts', jsTsRoutes);
+router.use('/sql-nosql', sqlNosqlRoutes);
+router.use('/github-gitlab', githubGitlabRoutes);
+router.use('/windows-linux-mac', windowsLinuxMacRoutes);
+
 export default router;
