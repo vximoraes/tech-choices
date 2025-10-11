@@ -28,7 +28,7 @@ export class FrontBackController {
         }
     }
 
-    // POST /api/front-back/vote - Votar no Front-Back
+    // POST /api/front-back/vote - Votar no Front-Back  
     async addVote(req, res) {
         try {
             const { option } = FrontBackVoteSchema.parse(req.body);
@@ -36,6 +36,7 @@ export class FrontBackController {
             const updatedVote = await this.voteService.addVote(this.category, option);
 
             res.json({
+                success: true,
                 category: this.category,
                 option: updatedVote.option,
                 count: updatedVote.count
@@ -44,7 +45,7 @@ export class FrontBackController {
             if (error instanceof ZodError) {
                 res.status(400).json({
                     error: 'Validation error',
-                    message: error.issues[0]?.message || 'Invalid option for front-back'
+                    message: `Invalid input: ${error.issues.map(i => i.message).join(', ')}`
                 });
                 return;
             }

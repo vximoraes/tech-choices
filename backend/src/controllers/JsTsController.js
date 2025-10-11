@@ -35,6 +35,7 @@ export class JsTsController {
             const updatedVote = await this.voteService.addVote(this.category, option);
 
             res.json({
+                success: true,
                 category: this.category,
                 option: updatedVote.option,
                 count: updatedVote.count
@@ -43,7 +44,7 @@ export class JsTsController {
             if (error instanceof ZodError) {
                 res.status(400).json({
                     error: 'Validation error',
-                    message: error.issues[0]?.message || 'Invalid option for JavaScript vs TypeScript'
+                    message: `Invalid input: ${error.issues.map(i => i.message).join(', ')}`
                 });
                 return;
             }
