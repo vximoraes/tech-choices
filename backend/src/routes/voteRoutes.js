@@ -10,10 +10,10 @@ const router = Router();
 
 // Rotas específicas por categoria
 router.use('/categories', categoriesRoutes);
-router.use('/front-back', frontBackRoutes);
-router.use('/js-ts', jsTsRoutes);
-router.use('/sql-nosql', sqlNosqlRoutes);
-router.use('/github-gitlab', githubGitlabRoutes);
-router.use('/windows-linux-mac', windowsLinuxMacRoutes);
+router.use('/categories/front-back', frontBackRoutes);
+router.use('/categories/js-ts', jsTsRoutes);
+router.use('/categories/sql-nosql', sqlNosqlRoutes);
+router.use('/categories/github-gitlab', githubGitlabRoutes);
+router.use('/categories/windows-linux-mac', windowsLinuxMacRoutes);
 
 export default router;
