@@ -24,19 +24,72 @@ connectDB().then(async () => {
 });
 
 
-// Configuração CORS para permitir acesso do frontend
+// Configuração CORS mais permissiva para Vercel
 app.use(cors({
-    origin: [
-        'http://localhost:3001', 
+    origin: function (origin, callback) {
+        // Permitir requisições sem origin (ex: aplicações móveis, Postman)
+        if (!origin) return callback(null, true);
+        
+        // Lista de domínios permitidos
+        const allowedOrigins = [
+            'http://localhost:3001',
+            'http://localhost:3000', 
+            'https://scalar.com',
+            'https://tech-choices-front.vercel.app',
+            'https://tech-choices.vercel.app'
+        ];
+        
+        // Permitir qualquer subdomínio do Vercel
+        const isVercelDomain = origin.includes('.vercel.app');
+        const isLocalhost = origin.includes('localhost');
+        const isAllowedOrigin = allowedOrigins.includes(origin);
+        
+        if (isAllowedOrigin || isVercelDomain || isLocalhost) {
+            return callback(null, true);
+        }
+        
+        console.log('CORS blocked origin:', origin);
+        return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    optionsSuccessStatus: 200
+}));
+
+// Middleware adicional para garantir headers CORS
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    
+    // Verificar se a origem é permitida
+    const allowedOrigins = [
+        'http://localhost:3001',
         'http://localhost:3000', 
         'https://scalar.com',
         'https://tech-choices-front.vercel.app',
         'https://tech-choices.vercel.app'
-    ],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+    ];
+    
+    const isVercelDomain = origin && origin.includes('.vercel.app');
+    const isLocalhost = origin && origin.includes('localhost');
+    const isAllowedOrigin = origin && allowedOrigins.includes(origin);
+    
+    if (isAllowedOrigin || isVercelDomain || isLocalhost || !origin) {
+        res.header('Access-Control-Allow-Origin', origin || '*');
+    }
+    
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+    
+    next();
+});
+
 app.use(express.json());
 
 // Configuração da documentação Swagger e Scalar
