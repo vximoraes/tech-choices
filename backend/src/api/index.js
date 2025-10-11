@@ -24,9 +24,15 @@ connectDB().then(async () => {
 });
 
 
-// Configuração CORS mais específica para evitar problemas
+// Configuração CORS para permitir acesso do frontend
 app.use(cors({
-    origin: ['http://localhost:3001', 'http://localhost:3000', 'https://scalar.com'],
+    origin: [
+        'http://localhost:3001', 
+        'http://localhost:3000', 
+        'https://scalar.com',
+        'https://tech-choices-front.vercel.app',
+        'https://tech-choices.vercel.app'
+    ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
